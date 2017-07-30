@@ -4,8 +4,12 @@
     "PrismicDOM": true,
     "XMLHttpRequest": true
   },
-  "parserOptions": {
-    "sourceType": "module"
+  "plugins": [
+    "html"
+  ],
+  "env": {
+    "node": false,
+    "browser": true
   },
   "rules": {
     "eqeqeq": ["error", "smart"],
@@ -13,7 +17,7 @@
     "no-bitwise": ["error", { "allow": ["|"] }],
     "linebreak-style": ["error", "unix"],
     "no-cond-assign": "off",
-    "no-console": "off",
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
     "no-unexpected-multiline": "error",
     "quotes": ["error", "single", "avoid-escape"],
     "semi": ["error", "never"]
