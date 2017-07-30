@@ -1,16 +1,11 @@
 {
-  "globals": {
-    "riot": true,
-    "PrismicDOM": true,
-    "XMLHttpRequest": true
-  },
-  "plugins": [
-    "html"
-  ],
   "env": {
     "node": false,
     "browser": true
   },
+  "plugins": [
+    "html"
+  ],
   "rules": {
     "eqeqeq": ["error", "smart"],
     "indent": ["error", 2],

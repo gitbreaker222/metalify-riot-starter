@@ -3,5 +3,10 @@
   "env": {
     "node": true
   },
+  "globals": {
+    "riot": true,
+    "PrismicDOM": true,
+    "XMLHttpRequest": true
+  },
   "extends": "eslint:recommended"
 }
