@@ -12,13 +12,19 @@ Generate dynamic static site:
 ```
 make build
 ```
+## Index
+
+- [Configuration]('#configuration')
+- [Metalsmith]('#metalsmith')
+- [Prismic]('#prismic')
+- [Riot]('#riot')
 
 ## Configuration
 
 - Metalsmith build tasks: `index.js`
 - Prismic headless CMS: `prismic-configuration.js`
 
-# Metalsmith
+## Metalsmith [(link)](http://www.metalsmith.io)
 
 [![npm version][npm-badge]][npm-url]
 [![Build Status][travis-badge]][travis-url]
@@ -27,162 +33,9 @@ make build
 
 > An extremely simple, _pluggable_ static site generator.
 
-In Metalsmith, all of the logic is handled by plugins. You simply chain them together. Here's what the simplest blog looks like...
-
-```js
-Metalsmith(__dirname)
-  .use(markdown())
-  .use(layouts('handlebars'))
-  .build(function(err) {
-    if (err) throw err;
-    console.log('Build finished!');
-  });
-```
-
-...but what if you want to get fancier by hiding your unfinished drafts and using custom permalinks? Just add plugins...
-
-```js
-Metalsmith(__dirname)
-  .use(drafts())
-  .use(markdown())
-  .use(permalinks('posts/:title'))
-  .use(layouts('handlebars'))
-  .build(function(err) {
-    if (err) throw err;
-    console.log('Build finished!');
-  });
-```
-
-...it's as easy as that!
-
-Special thanks to [Ian Storm Taylor](https://github.com/ianstormtaylor), [Andrew Meyer](https://github.com/Ajedi32), [Dominic Barnes](https://github.com/dominicbarnes), [Andrew Goodricke](https://github.com/woodyrew) and [others](https://github.com/segmentio/metalsmith/graphs/contributors) for their contributions!
-
-## Installation
-
-    $ npm install metalsmith
-
-
 ## Plugins
 
 Check out the website for a list of [plugins](http://www.metalsmith.io#the-community-plugins).
-
-
-## How does it work?
-
-Metalsmith works in three simple steps:
-
-  1. Read all the files in a source directory.
-  2. Invoke a series of plugins that manipulate the files.
-  3. Write the results to a destination directory!
-
-Each plugin is invoked with the contents of the source directory, and each file can contain YAML front-matter that will be attached as metadata, so a simple file like...
-
-    ---
-    title: A Catchy Title
-    date: 2014-12-01
-    ---
-
-    An informative article.
-
-  ...would be parsed into...
-
-```js
-{
-  'path/to/my-file.md': {
-    title: 'A Catchy Title',
-    date: new Date('2014-12-01'),
-    contents: new Buffer('An informative article.')
-  }
-}
-```
-
-...which any of the plugins can then manipulate however they want. And writing the plugins is incredibly simple, just take a look at the [example drafts plugin](examples/drafts-plugin/index.js).
-
-Of course they can get a lot more complicated too. That's what makes Metalsmith powerful; the plugins can do anything you want!
-
-
-## The secret...
-
-We keep referring to Metalsmith as a "static site generator", but it's a lot more than that. Since everything is a plugin, the core library is actually just an abstraction for manipulating a directory of files.
-
-Which means you could just as easily use it to make...
-
-  - [A simple project scaffolder.](examples/project-scaffolder)
-  - [A simple build tool for Sass files.](examples/build-tool)
-  - [A simple static site generator.](examples/static-site)
-  - [A Jekyll-like static site generator.](examples/jekyll)
-  - [A Wintersmith-like static site generator.](examples/wintersmith)
-
-
-## Resources
-
-  - IRC Channel - it's `#metalsmith` on freenode!
-  - [Slack Channel](http://metalsmith-slack.herokuapp.com/)
-  - [Getting to Know Metalsmith](http://robinthrift.com/post/getting-to-know-metalsmith/) - a great series about how to use Metalsmith for your static site.
-  - [Building a Blog With Metalsmith](https://azurelogic.com/posts/building-a-blog-with-metalsmith/) - a blog post about how to create a basic blog with Metalsmith. Check out the related [video of the talk](https://www.youtube.com/watch?v=cAq5_5Yy7Tg) too!
-  - [Awesome Metalsmith](https://github.com/lambtron/awesome-metalsmith) - great collection of resources, examples, and tutorials
-
-## CLI
-
-In addition to a simple [Javascript API](#api), the Metalsmith CLI can read configuration from a `metalsmith.json` file, so that you can build static-site generators similar to [Jekyll](http://jekyllrb.com) or [Wintersmith](http://wintersmith.io) easily. The example blog above would be configured like this:
-
-```json
-{
-  "source": "src",
-  "destination": "build",
-  "plugins": {
-    "metalsmith-drafts": true,
-    "metalsmith-markdown": true,
-    "metalsmith-permalinks": "posts/:title",
-    "metalsmith-layouts": "handlebars"
-  }
-}
-```
-
-You can specify your plugins as either an object or array. Using an array would allow you to specify use of the same plugin multiple times. The above example is then defined as so:
-
-```json
-{
-  "source": "src",
-  "destination": "build",
-  "plugins": [
-    {"metalsmith-drafts": true},
-    {"metalsmith-markdown": true},
-    {"metalsmith-permalinks": "posts/:title"},
-    {"metalsmith-templates": "handlebars"}
-  ]
-}
-```
-
-And then just install `metalsmith` and the plugins and run the metalsmith CLI...
-
-    $ node_modules/.bin/metalsmith
-
-        Metalsmith · reading configuration from: /path/to/metalsmith.json
-        Metalsmith · successfully built to: /path/to/build
-
-Or if you install them globally, you can just use:
-
-    $ metalsmith
-
-        Metalsmith · reading configuration from: /path/to/metalsmith.json
-        Metalsmith · successfully built to: /path/to/build
-
-Options recognised by `metalsmith.json` are `source`, `destination`, `concurrency`, `metadata`, `clean` and `frontmatter` - See "*API*" section below for usage.
-
-Checkout the [static site](examples/static-site), [Jekyll](examples/jekyll) or [Wintersmith](examples/wintersmith) examples to see the CLI in action.
-
-If you want to use a custom plugin, but feel like it's too domain-specific to
-be published to the world, you can include plugins as local npm modules:
-(simply use a relative path from your root directory)
-
-```json
-{
-  "plugins": {
-    "./lib/metalsmith/plugin.js": true
-  }
-}
-```
 
 ## API
 
@@ -280,29 +133,7 @@ rm -rf .
 
 would be built with mode ```-rwxrw-r--```, i.e. user-executable.
 
-
-## Troubleshooting
-
-### Node Version Requirements
-Metalsmith v2.0 and above uses [generators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) which has some considerations for `node.js 0.12.x` and below.
-
-#### Using `node.js 0.10.x`
-You have two options:
-
-1. Upgrade to latest stable version of `node.js` (>= `0.12.x` — see "*Using `node.js 0.12.x`*" section below)
-2. Use Metalsmith v1.7. Put `"metalsmith": "^1.7.0"` in your `package.json` and `npm install` that version.
-
-#### Using `node.js 0.12.x`
-You have three options:
-
-1. Run `node.js` with `--harmony_generators` flag set.
-    1. `node --harmony_generators my_script.js`
-    2. Using `package.json`: `"scripts": {"start": "node --harmony_generators my_script.js"}`. Run with `npm run`
-2. `npm install` [harmonize](https://www.npmjs.com/package/harmonize) and require before Metalsmith is used. e.g. `require("harmonize")(["harmony-generators"]);`
-3. Use Metalsmith v1.7. Put `"metalsmith": "^1.7.0"` in your `package.json` and `npm install` that version.
-
-
-## License
+### License
 
 The MIT License (MIT)
 
@@ -322,3 +153,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 [coveralls-url]: https://coveralls.io/github/segmentio/metalsmith?branch=master
 [slack-badge]: https://img.shields.io/badge/Slack-Join%20Chat%20→-blue.svg
 [slack-url]: http://metalsmith-slack.herokuapp.com/
+
+## Prismic
+
+123
+
+## Riot
+
+123
