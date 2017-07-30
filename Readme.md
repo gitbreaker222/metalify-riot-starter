@@ -1,3 +1,22 @@
+# Metalsmith-Prismic-Riot starter
+
+
+Install dependencies:
+
+```
+npm install
+```
+
+Generate dynamic static site:
+
+```
+make build
+```
+
+## Configuration
+
+- Metalsmith build tasks: `index.js`
+- Prismic headless CMS: `prismic-configuration.js`
 
 # Metalsmith
 
