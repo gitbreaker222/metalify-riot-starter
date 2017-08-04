@@ -1,0 +1,21 @@
+doctype html
+html(lang='en')
+  head
+    title #{title}
+    meta(name="description" content=description)
+    meta(charset="UTF-8")
+  
+  body
+    
+    header
+      p
+        a(href="/") Home
+        
+    block page
+      
+    app-footer
+      
+    script(type="riot/tag")
+      include ../tags/app-footer.tag.html
+      
+    script(type="text/javascript" src="assets/main.js")

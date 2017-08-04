@@ -1,14 +1,8 @@
-doctype html
-html(lang='en')
-  head
-    title #{title}
-    meta(name='description' content=description)
-  body
+extends base.pug
     
-    h1 #{title}
-    
-    time #{date}
-    
-    != contents
-    
-    footer
+block page
+  h1 #{title}
+
+  time #{date}
+
+  != contents

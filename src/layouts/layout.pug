@@ -1,14 +1,12 @@
-doctype html
-html(lang='en')
-  head
-    title #{title}
-  
-  body
-    
+extends base.pug
+
+block page
     h1 #{title}
-    
+
     p #{description}
 
     != contents
 
-    footer
+    
+       
+       
