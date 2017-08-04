@@ -1,22 +1,23 @@
-var Metalsmith  = require('./lib');
-var sass        = require('metalsmith-sass');
-var concat      = require('metalsmith-concat');
-var markdown    = require('metalsmith-markdown');
-var layouts     = require('metalsmith-layouts');
-const example   = require('./modules/example');
+var Metalsmith      = require('./lib');
+var sass            = require('metalsmith-sass');
+var concat          = require('metalsmith-concat');
+var markdown        = require('metalsmith-markdown');
+const layouts       = require('./modules/metalsmith-layouts-222/index');
+const listRiotTags  = require('./modules/metalsmith-list-riot-tags');
 
 Metalsmith(__dirname)
   .metadata({
     title: "My Static Site & Blog whäääää",
-    description: "It's about saying »Hello« to the World whääää.",
+    description: "It's about saying »whääää« to the World.",
     generator: "Metalsmith",
-    url: "http://www.metalsmith.io/"
+    url: "http://www.metalsmith.io/",
+    riotTags: 'app-footer.tag.html'
   })
   .source('./src')
   .destination('./build')
   .ignore([
     '.*.*',  //ignore hidden files like .eslintrc
-    //'layouts' //ignore layouts folder when not prebuild pages
+    'layouts',
   ])
   .clean(true)
   .use(sass({
@@ -37,14 +38,13 @@ Metalsmith(__dirname)
     ],
     output: 'assets/main.js',
   }))
-  .use(example({
-    but: 'whole'
-  }))
-  //.use(listRiotTags({butt: 'hole'}))
+  .use(listRiotTags())
   .use(markdown())
   .use(layouts({
-    engine: 'handlebars',
-    directory: './src/layouts'
+    engine: 'pug',
+    directory: './src/layouts',
+    layoutExtension: '.pug',
+    pattern: 'content/**/*.html'
   }))
   .build(function(err) {
     if (err) { throw err; }

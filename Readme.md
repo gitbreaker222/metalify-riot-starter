@@ -35,7 +35,28 @@ make build
 
 ## Plugins
 
-Check out the website for a list of [plugins](http://www.metalsmith.io#the-community-plugins).
+The layouts plugin has been customized so it can process layout definitions without file extension. Example:
+
+```markdown
+---
+title: My title
+layout: default
+---
+
+# My content page
+```
+
+The used file extension defaults to `.html` and can be overriden with `layoutExtension`. Example for ``/index.js`:
+
+```Javascript
+.use(layouts({
+  engine: 'pug',
+  directory: './src/layouts',
+  layoutExtension: '.pug',
+  pattern: 'content/**/*.html'
+}))
+```
+
 
 ## API
 
