@@ -1,6 +1,6 @@
 
 build: node_modules
-	node index.js
+	node build.js
 
 node_modules: package.json
 	npm install

@@ -2,10 +2,6 @@
   parser: "babel-eslint"
   env:
     node: true
-  globals:
-    riot: true
-    PrismicDom: true
-    XMLHttpRequest: true
   extends: eslint:recommended
   rules:
     no-console: off

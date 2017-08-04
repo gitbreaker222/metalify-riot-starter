@@ -5,6 +5,9 @@
   plugins:
     - html
   globals:
+    riot: true
+    PrismicDom: true
+    XMLHttpRequest: true
     app: true
   rules:
     eqeqeq: [error, smart]

@@ -7,8 +7,8 @@ const moveUp        = require('metalsmith-move-up');
 
 Metalsmith(__dirname)
   .metadata({
-    title: "My Static Site & Blog whäääää",
-    description: "It's about saying »whääää« to the World.",
+    title: "My Static Site",
+    description: "It uses riotJS, SASS and netlifyCMS",
     generator: "Metalsmith",
     url: "http://www.metalsmith.io/",
     riotTags: 'app-footer.tag.html'
@@ -40,7 +40,7 @@ Metalsmith(__dirname)
   .use(layouts({
     engine: 'pug',
     directory: './src/layouts',
-    layoutExtension: '.pug',
+    layoutExtension: '.pug', //custom
     pattern: 'content/**/*.html'
   }))
   .use(moveUp('content/**'))
