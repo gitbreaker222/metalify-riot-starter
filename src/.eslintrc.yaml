@@ -4,6 +4,8 @@
     browser: true
   plugins:
     - html
+  globals:
+    app: true
   rules:
     eqeqeq: [error, smart]
     indent: [error, 2]

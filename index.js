@@ -1,10 +1,9 @@
-var Metalsmith      = require('./lib');
-var sass            = require('metalsmith-sass');
-var concat          = require('metalsmith-concat');
-var markdown        = require('metalsmith-markdown');
+const Metalsmith    = require('./lib');
+const sass          = require('metalsmith-sass');
+const concat        = require('metalsmith-concat');
+const markdown      = require('metalsmith-markdown');
 const layouts       = require('./modules/metalsmith-layouts-222/index');
 const moveUp        = require('metalsmith-move-up');
-const listRiotTags  = require('./modules/metalsmith-list-riot-tags');
 
 Metalsmith(__dirname)
   .metadata({
@@ -18,8 +17,7 @@ Metalsmith(__dirname)
   .destination('./build')
   .ignore([
     '.*.*',  //ignore hidden files like .eslintrc
-    'layouts',
-    'tags'
+    'layouts'
   ])
   .clean(true)
   .use(sass({
@@ -32,16 +30,12 @@ Metalsmith(__dirname)
   }))
   .use(concat({
     files: [
-      'riot/riot.min.js',
-      'js/setup.js',
-      'js/asdf.js'
+      'tags/**/*.tag.html',
+      'js/riot-setup.js',
+      'js/**/*.js'
     ],
-    searchPaths: [
-      'node_modules',
-    ],
-    output: 'assets/main.js',
+    output: 'assets/main.tag.js'
   }))
-  .use(listRiotTags())
   .use(markdown())
   .use(layouts({
     engine: 'pug',

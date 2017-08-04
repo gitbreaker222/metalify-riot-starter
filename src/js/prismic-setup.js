@@ -1,18 +1,3 @@
-console.log('-----|||-----\n\n')
-
-/*
-RIOT SETUP
-*/
-var app = {}
-riot.observable(app)
-// event names
-app.evt = {
-  refReady: 'refReady',
-  contentReady: 'contentReady'
-}
-// configuration
-app.config = {}
-
 /*
 PRISMIC CONTENT SETUP
 */
@@ -81,5 +66,4 @@ function rawContentToHtml (raw) {
 /*
 RUN
 */
-loadAllContent()
-
+// loadAllContent()

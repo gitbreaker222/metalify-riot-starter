@@ -11,3 +11,5 @@ layout: layout
 <a href="/posts/third-post/">Third post</a>
 
 <a href="/posts/fourth-post/">Fourth post</a>
+
+<app-widget></app-widget>

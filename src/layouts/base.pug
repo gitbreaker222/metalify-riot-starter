@@ -13,9 +13,15 @@ html(lang='en')
         
     block page
       
-    app-footer
+    app-footer(generator=generator url=url)
+    
+    script(type="text/javascript")
+      include ../../node_modules/riot/riot+compiler.min.js
+      // TODO load prismic
+    
+    script(type="riot/tag" data-src="assets/main.tag.js")
       
-    script(type="riot/tag")
-      include ../tags/app-footer.tag.html
       
-    script(type="text/javascript" src="assets/main.js")
+    script.
+      riot.mount('*')
+      
