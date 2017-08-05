@@ -1,6 +1,6 @@
-# Metalsmith-Netlify-Riot starter
+# Metalify-Riot-Starter
 
-TODO description
+Website generator with Metalsmith, Netlify / NetlifyCMS and Riot JS
 
 ## Quick start
 

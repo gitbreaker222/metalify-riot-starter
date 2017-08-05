@@ -1,7 +1,8 @@
 {
-  "name": "metalsmith-prismic-riot",
-  "repository": "git://github.com/segmentio/metalsmith.git",
-  "description": "A starter for static sites built with metalsmith, headless CMS at prismic and riot.js for frontend.",
+  "name": "Metalify-Riot-Starter",
+  "repository": "git@github.com:gitbreaker222/metalify-riot-starter.git",
+  "homepage": "https://github.com/gitbreaker222/metalify-riot-starter",
+  "description": "Website generator with Metalsmith, Netlify / NetlifyCMS and Riot JS",
   "bin": {
     "metalsmith": "bin/metalsmith",
     "_metalsmith": "bin/_metalsmith"
@@ -26,7 +27,6 @@
     "eslint": "^4.3.0",
     "eslint-plugin-html": "^3.1.1",
     "gray-matter": "^2.1.0",
-    "handlebars": "^4.0.5",
     "has-generators": "^1.0.1",
     "is": "^3.1.0",
     "is-utf8": "~0.2.0",
@@ -36,8 +36,6 @@
     "metalsmith-markdown": "0.2.1",
     "metalsmith-move-up": "^1.0.0",
     "metalsmith-sass": "^1.4.0",
-    "prismic-dom": "^1.2.8",
-    "prismic-javascript": "^1.1.5",
     "pug": "^2.0.0-rc.3",
     "recursive-readdir": "^2.1.0",
     "rimraf": "^2.2.8",
@@ -61,7 +59,11 @@
     "website",
     "blog",
     "generator",
-    "prismic",
+    "boilerplate",
+    "metalsmith",
+    "netlify",
+    "netlifyCMS",
+    "riot",
     "riotjs"
   ]
 }

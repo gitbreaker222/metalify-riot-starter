@@ -1,3 +1,4 @@
+const info          = require('./package.json');
 const Metalsmith    = require('./lib');
 const sass          = require('metalsmith-sass');
 const concat        = require('metalsmith-concat');
@@ -7,11 +8,10 @@ const moveUp        = require('metalsmith-move-up');
 
 Metalsmith(__dirname)
   .metadata({
-    title: "My Static Site",
-    description: "It uses riotJS, SASS and netlifyCMS",
+    title: info.name,
+    description: info.description,
     generator: "Metalsmith",
-    url: "http://www.metalsmith.io/",
-    riotTags: 'app-footer.tag.html'
+    url: info.homepage
   })
   .source('./src')
   .destination('./build')
