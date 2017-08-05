@@ -48,8 +48,9 @@ TODO description
 
 - [Configuration]('#configuration')
 - [Metalsmith]('#metalsmith')
-- [Prismic]('#prismic')
-- [Riot]('#riot')
+- [Netlify]('#netlify')
+- [NetlifyCMS]('#netlifycms')
+- [Riot JS]('#riot-js')
 
 ## Configuration
 
@@ -107,7 +108,13 @@ Copyright &copy; Segment \<friends@segment.com\>
 
 ---
 
-## Netlify / NetlifyCMS
+## Netlify
+
+TODO
+
+---
+
+## NetlifyCMS
 
 TODO
 
