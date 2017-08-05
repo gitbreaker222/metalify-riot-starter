@@ -19,7 +19,7 @@ Metalsmith(__dirname)
     '.*.*',  //ignore hidden files like .eslintrc
     'layouts'
   ])
-  .clean(true)
+  .clean(false)
   .use(sass({
     sourceMap: true,
     sourceMapContents: true,
