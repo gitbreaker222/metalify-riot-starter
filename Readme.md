@@ -40,6 +40,10 @@ TODO description
     - […]
     - … build command: `make build`
 
+1. Configure NetlifyCMS
+
+  Open `src/admin/config.yml` and enter link to your repo.
+
 ## Index
 
 - [Configuration]('#configuration')

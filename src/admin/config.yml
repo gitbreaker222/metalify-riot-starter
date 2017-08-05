@@ -1,0 +1,6 @@
+backend:
+  name: github
+  repo: owner-name/repo-name # Path to your Github repository
+  branch: master # Branch to update
+  
+publish_mode: editorial_workflow
