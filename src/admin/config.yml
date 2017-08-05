@@ -1,6 +1,21 @@
 backend:
   name: github
-  repo: owner-name/repo-name # Path to your Github repository
-  branch: master # Branch to update
-  
+  repo: gitbreaker222/metalify-riot-starter
+  branch: master
+
 publish_mode: editorial_workflow
+
+media_folder: "src/media"
+public_folder: "/media"
+
+collections:
+  - name: "posts" # Used in routes, e.g., /admin/collections/blog
+    label: "Posts" # Used in the UI
+    folder: "src/content/posts" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    fields: # The fields for each document, usually in front matter
+      - {label: "Layout", name: "layout", widget: "hidden", default: "post"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Featured Image", name: "thumbnail", widget: "image"}
+      - {label: "Content", name: "contents", widget: "markdown"}
