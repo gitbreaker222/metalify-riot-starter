@@ -8,6 +8,15 @@ public_folder: "/media"
 publish_mode: editorial_workflow
 
 collections:
+  - name: "index"
+    label: "Frontpage"
+    folder: "src/content"
+    create: false
+    fields:
+      - {label: "Layout", name: "layout", widget: "hidden", default: "layout"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Body", name: "body", widget: "markdown"}
+
   - name: "posts" # Used in routes, e.g., /admin/collections/blog
     label: "Posts" # Used in the UI
     folder: "src/content/posts" # The path to the folder where the documents are stored
