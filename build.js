@@ -2,6 +2,7 @@ const info          = require('./package.json');
 const Metalsmith    = require('./lib');
 const sass          = require('metalsmith-sass');
 const concat        = require('metalsmith-concat');
+const folderJson    = require('./modules/metalsmith-folder-to-json');
 const markdown      = require('metalsmith-markdown');
 const layouts       = require('./modules/metalsmith-layouts-222/index');
 const moveUp        = require('metalsmith-move-up');
@@ -35,6 +36,9 @@ Metalsmith(__dirname)
       'js/**/*.js'
     ],
     output: 'assets/main.tag.js'
+  }))
+  .use(folderJson({
+    folder: './src/content'
   }))
   .use(markdown())
   .use(layouts({

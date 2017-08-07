@@ -1,12 +1,21 @@
 extends base.pug
 
 block page
-    h1 #{title}
+  h1 #{title}
 
-    p #{description}
+  p #{description}
+  
+  mixin collection(x)
+    each item in x
+      if (item.type == 'file')
+        div #{item.name}
+      else if (item.type == 'folder')
+        div.deeper
+          | --- #{item.name} ---
+          +collection(item.children)
+      
+  nav
+    +collection(folderJson)
 
-    != contents
-
+  //!= contents
     
-       
-       
