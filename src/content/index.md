@@ -1,17 +1,15 @@
 ---
 layout: layout
+title: Metalify-Riot-Starter
 ---
-
 ![test image](./media/logo.svg)
 
-<h2>Read what I have to say</h2>
+- Edit content with CMS
 
-<a href="/posts/first-post/">First post</a>
+- Auto updating navigation menu
 
-<a href="/posts/second-post/">Second post</a>
+- Write style with SASS
 
-<a href="/posts/third-post/">Third post</a>
-
-<a href="/posts/fourth-post/">Fourth post</a>
+- Build custom tags with RiotJS
 
 <app-widget></app-widget>
