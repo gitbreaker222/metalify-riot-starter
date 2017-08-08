@@ -1,11 +1,11 @@
-const info          = require('./package.json');
-const Metalsmith    = require('./lib');
-const sass          = require('metalsmith-sass');
-const concat        = require('metalsmith-concat');
-const folderJson    = require('./modules/metalsmith-folder-to-json');
-const markdown      = require('metalsmith-markdown');
-const layouts       = require('./modules/metalsmith-layouts-222/index');
-const moveUp        = require('metalsmith-move-up');
+const info          = require('./package.json')
+const Metalsmith    = require('./lib')
+const sass          = require('metalsmith-sass')
+const concat        = require('metalsmith-concat')
+const folderTree    = require('./modules/metalsmith-folder-to-json')
+const markdown      = require('metalsmith-markdown')
+const layouts       = require('./modules/metalsmith-layouts-222/index')
+const moveUp        = require('metalsmith-move-up')
 
 Metalsmith(__dirname)
   .metadata({
@@ -26,7 +26,7 @@ Metalsmith(__dirname)
     sourceMapContents: true,
     outputDir: function(originalPath) {
       // this will change scss/some/path to css/some/path
-      return originalPath.replace("style", "assets");
+      return originalPath.replace("style", "assets")
     }
   }))
   .use(concat({
@@ -37,7 +37,7 @@ Metalsmith(__dirname)
     ],
     output: 'assets/main.tag.js'
   }))
-  .use(folderJson({
+  .use(folderTree({
     folder: './src/content'
   }))
   .use(markdown())
@@ -49,5 +49,5 @@ Metalsmith(__dirname)
   }))
   .use(moveUp('content/**'))
   .build(function(err) {
-    if (err) { throw err; }
-  });
+    if (err) { throw err }
+  })
