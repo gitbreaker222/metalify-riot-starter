@@ -8,7 +8,7 @@ html(lang='en')
   body
     
     header
-      mixin collection(x)
+      mixin list(x)
         each item in x
           if (item.type == 'file')
             - item.path = item.path.replace('.md', '.html')
@@ -18,11 +18,13 @@ html(lang='en')
           else if (item.type == 'folder')
             div.subfolder
               h3 #{item.name}
-              +collection(item.children)
+              +list(item.children)
           
       nav(role="navigation" aria-labelledby="firstLabel")
         h2(span id="firstLabel" class="hidden") Menu
-        +collection(folderTree)
+        +list(folderTree)
+        div: a(href="/admin") CMS
+        
         
     block page
       
