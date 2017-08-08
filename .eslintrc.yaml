@@ -5,3 +5,4 @@
   extends: eslint:recommended
   rules:
     no-console: off
+    semi: [error, never]
