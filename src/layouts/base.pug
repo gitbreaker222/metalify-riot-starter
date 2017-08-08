@@ -8,8 +8,21 @@ html(lang='en')
   body
     
     header
-      p
-        a(href="/") Home
+      mixin collection(x)
+        each item in x
+          if (item.type == 'file')
+            - item.path = item.path.replace('.md', '.html')
+            - item.name = item.name.replace('.md', '')
+            - item.name = item.name.replace('index', 'home')
+            div: a(href=item.path) #{item.name}
+          else if (item.type == 'folder')
+            div.subfolder
+              h3 #{item.name}
+              +collection(item.children)
+          
+      nav(role="navigation" aria-labelledby="firstLabel")
+        h2(span id="firstLabel" class="hidden") Menu
+        +collection(folderTree)
         
     block page
       
