@@ -7,7 +7,7 @@
 - hideKey || 'hideInMenu' *
 - ascOrDesc || 'asc'
 
-> (*) These are set in the frontmatter
+> * These are set in the frontmatter with the defined key
 
 ## Example 1
 
