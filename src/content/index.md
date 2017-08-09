@@ -1,6 +1,7 @@
 ---
 layout: layout
 title: Metalify-Riot-Starter
+showInMenu: true
 ---
 ![test image](./media/logo.svg)
 

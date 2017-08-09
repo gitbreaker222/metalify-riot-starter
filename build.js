@@ -2,7 +2,7 @@ const info          = require('./package.json')
 const Metalsmith    = require('./lib')
 const sass          = require('metalsmith-sass')
 const concat        = require('metalsmith-concat')
-const folderTree    = require('./modules/metalsmith-folder-to-json')
+const contentMenu   = require('./modules/metalsmith-content-menu')
 const markdown      = require('metalsmith-markdown')
 const layouts       = require('./modules/metalsmith-layouts-222/index')
 const moveUp        = require('metalsmith-move-up')
@@ -37,10 +37,14 @@ Metalsmith(__dirname)
     ],
     output: 'assets/main.tag.js'
   }))
-  .use(folderTree({
-    folder: './src/content'
-  }))
   .use(markdown())
+  .use(contentMenu({
+    folder: 'content',
+    //fileType: '.html',
+    orderBy: 'date',
+    ascOrDesc: 'desc'
+  }))
+  //.use(debug())
   .use(layouts({
     engine: 'pug',
     directory: './src/layouts',
@@ -51,3 +55,14 @@ Metalsmith(__dirname)
   .build(function(err) {
     if (err) { throw err }
   })
+
+  // function debug() {
+  //   return function(files, metalsmith, done) {
+  //     Object.keys(files).forEach(function(file){
+  //       console.log('##', file)
+  //       //var data = files[file]
+  //     })
+  //     console.log(metalsmith.metadata().navs)
+  //     done()
+  //   }
+  // }
