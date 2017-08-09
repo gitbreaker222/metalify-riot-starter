@@ -1,5 +1,5 @@
 // Include debug to help with debugging.
-var debug = require('debug')('metalsmith-content-menu')
+//var debug = require('debug')('metalsmith-content-menu')
 var _     = require("lodash")
 
 var metalsmith_plugin = function (opts) {
@@ -41,7 +41,7 @@ var metalsmith_plugin = function (opts) {
       newObj.name     = fileData.title || path
       newObj.path     = path
       newObj.folderPath = folderPath
-      newObj[indexKey] = fileData[indexKey]
+      newObj[indexKey] = fileData[indexKey] || null
       newObj[orderKey] = fileData[orderKey]
 
       collection.push(newObj)
