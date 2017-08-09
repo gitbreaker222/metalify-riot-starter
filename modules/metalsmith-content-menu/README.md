@@ -1,3 +1,14 @@
+## Options and defaults
+
+- folder || ''
+- fileType || ''
+- orderBy || 'title' *
+- indexKey || 'menuIndex' *
+- hideKey || 'hideInMenu' *
+- ascOrDesc || 'asc'
+
+> (*) These are set in the frontmatter
+
 ## Example 1
 
 key names of filestram look like this:
@@ -22,7 +33,9 @@ assets/main.tag.js
 options:
 ```javascript
 {
-  folder: 'content'
+  folder: 'content',
+  fileType: '.html',
+  orderBy: 'date'
 }
 ```
 
@@ -34,7 +47,8 @@ contentMenu: [
   {
     type: 'file',
     name: 'index.html',
-    path: '/index.html'
+    path: '/index.html',
+    date: undefined
   },
   {
     name: 'posts',

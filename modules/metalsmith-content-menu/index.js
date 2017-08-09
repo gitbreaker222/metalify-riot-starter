@@ -4,12 +4,12 @@ var _     = require("lodash")
 
 var metalsmith_plugin = function (opts) {
   //console.log('options:',opts)
-  var folder    = opts.folder || ''
-  var fileType  = opts.fileType || ''
-  var orderKey  = opts.orderBy || 'title'
-  var indexKey  = opts.indexKey || 'menuIndex'
-  var ascOrDesc    = opts.descending || 'asc'
-  // var hideKey    = opts.hideKey || 'hideInMenu'
+  var folder      = opts.folder || ''
+  var fileType    = opts.fileType || ''
+  var orderKey    = opts.orderBy || 'title'
+  var indexKey    = opts.indexKey || 'menuIndex'
+  var ascOrDesc   = opts.ascOrDesc || 'asc'
+  var hideKey    = opts.hideKey || 'hideInMenu'
 
 
   return function (files, metalsmith, done) {
@@ -28,15 +28,17 @@ var metalsmith_plugin = function (opts) {
     // filter for matching files
     // and transform files object to collection
     _.keys(files).forEach(function (filePath) {
-      if (!filePath.startsWith(folder)) return
-      if (!filePath.endsWith(fileType)) return
       var path        = filePath.replace(folder, '')
       var folderPath  = getfolderPath(path)
       var fileData    = files[filePath]
 
+      if (fileData[hideKey]) return
+      if (!filePath.startsWith(folder)) return
+      if (!filePath.endsWith(fileType)) return
+
       var newObj      = {}
       newObj.type     = 'file'
-      newObj.name     = fileData.title
+      newObj.name     = fileData.title || path
       newObj.path     = path
       newObj.folderPath = folderPath
       newObj[indexKey] = fileData[indexKey]
@@ -77,17 +79,10 @@ var metalsmith_plugin = function (opts) {
       })
     }
 
-
     _.forEach(collection, itemGrouping)
 
-    console.log('result', contentMenu)
-    //console.log(files)
     metadata.contentMenu = contentMenu
     metalsmith.metadata(metadata)
-
-
-
-
 
     // Errors should be reported if necessary
     /*
@@ -100,5 +95,4 @@ var metalsmith_plugin = function (opts) {
   }
 }
 
-// Expose the plugin
 module.exports = metalsmith_plugin
