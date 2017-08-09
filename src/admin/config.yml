@@ -20,11 +20,13 @@ collections:
         name: "hideInMenu"
         widget: "boolean"
         default: false
+        required: false
       -
-        label: "Index in Manu (0 for auto order)"
+        label: "Index in menu (empty or 0 for auto order)"
         name: "menuIndex"
         widget: "number"
         default: 0
+        required: false
       - {label: "Body", name: "body", widget: "markdown"}
 
   - name: "posts" # Used in routes, e.g., /admin/collections/blog
