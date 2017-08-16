@@ -96,5 +96,11 @@ collections:
           - {label: Loud, name: loud, widget: boolean}
           - {label: Message, name: message, widget: text}
           - {label: URL, name: url}
-      #- {label: "Relation", name: "relation", widget: "relation", required: false}
+      - label: Relation (posts name)
+        name: relation
+        widget: relation
+        collection: posts
+        searchFields: [title]
+        valueField: title
+        required: false
       #- {label: "Body", name: "body", widget: "markdown"}
