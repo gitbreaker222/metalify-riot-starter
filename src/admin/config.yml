@@ -60,10 +60,9 @@ collections:
     slug: {{slug}}
     fields: # The fields for each document, usually in front matter
       - {label: "Layout", name: "layout", widget: "hidden", default: "layout"} #TODO change to setting
-      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Title", name: "title", widget: "string", pattern: [".{10,}", "Should have more than 10 characters"] }
       - {label: "Description", name: "description", widget: "text", required: false}
-      -
-        label: "Exclude from menu?"
+      - label: "Exclude from menu?"
         name: "hideInMenu"
         widget: "boolean"
         default: false
@@ -77,7 +76,16 @@ collections:
       - {label: "Number", name: "number", widget: "number", required: false}
       - {label: "Image", name: "image", widget: "image", required: false}
       - {label: "File", name: "file", widget: "file", required: false}
-      - {label: "Object", name: "object", widget: "object", required: false}
+      - label: Object
+        name: object
+        widget: object
+        fields:
+          - {label: Title, name: title, widget: string, tagname: h1}
+          - {label: Published, name: published, widget: boolean}
+          - {label: Loud, name: loud, widget: boolean}
+          - {label: Message, name: message, widget: text}
+          - {label: URL, name: url}
+        required: false
       - label: "List"
         name: "list"
         widget: "list"
