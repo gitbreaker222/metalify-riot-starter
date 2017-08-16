@@ -104,3 +104,19 @@ collections:
         valueField: title
         required: false
       #- {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "timetable"
+    label: "Opening times"
+    folder: "src/content/settings"
+    create: true
+    slug: {{slug}}
+    fields:
+      - label: "Monday"
+        name: "time1"
+        widget: "list"
+        required: false
+        fields:
+          - {label: From (hour), name: time1_from_h, widget: number}
+          - {label: From (minute), name: time1_from_m, widget: number}
+          - {label: To (hour), name: time1_to_h, widget: number}
+          - {label: To (minute), name: time1_to_m, widget: number}
