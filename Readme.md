@@ -13,24 +13,10 @@ Website generator with Metalsmith, Netlify / NetlifyCMS and Riot JS
 1. Build static site in `build/` folder:
 
   ```
-  make build
-  ```
-1. Run locally
-
-  install a http server if you haven't one yet. For instance:
-
-  https://www.npmjs.com/package/live-server
-
-  ```
-  npm install -g live-server
+  make build dev=true
   ```
 
-  …run (with this server browser will open on `localhost:8080`)
-
-  ```
-  cd build/
-  live-server
-  ```
+  With the **dev** flag this will rebuild on changes in the source folder and serve the build folder in your browser on `localhost:8080`)
 
 1. Deploy to Netlify
 
