@@ -6,8 +6,10 @@ const contentMenu   = require('./modules/metalsmith-content-menu')
 const markdown      = require('metalsmith-markdown')
 const layouts       = require('./modules/metalsmith-layouts-222/index')
 const moveUp        = require('metalsmith-move-up')
+var dev = process.argv[2] || false
+if (dev) dev        = require("metalsmith-dev")
 
-Metalsmith(__dirname)
+var site = Metalsmith(__dirname)
   .metadata({
     title: info.name,
     description: info.description,
@@ -16,7 +18,10 @@ Metalsmith(__dirname)
   })
   .source('./src')
   .destination('./build')
-  .ignore([
+
+// Break the chain, so "site" is defined before dev tasks access it below
+
+site.ignore([
     '.*.*',  //ignore hidden files like .eslintrc
     'layouts'
   ])
@@ -44,7 +49,6 @@ Metalsmith(__dirname)
     orderBy: 'date',
     ascOrDesc: 'desc'
   }))
-  //.use(debug())
   .use(layouts({
     engine: 'pug',
     directory: './src/layouts',
@@ -52,17 +56,23 @@ Metalsmith(__dirname)
     pattern: 'content/**/*.html'
   }))
   .use(moveUp('content/**'))
+  //.use(debug())
   .build(function(err) {
     if (err) { throw err }
   })
 
-  // function debug() {
-  //   return function(files, metalsmith, done) {
-  //     Object.keys(files).forEach(function(file){
-  //       console.log('##', file)
-  //       //var data = files[file]
-  //     })
-  //     console.log(metalsmith.metadata().navs)
-  //     done()
-  //   }
-  // }
+if (dev) {
+  dev.watch(site)
+  dev.serve(site)
+}
+
+// function debug() {
+//   return function(files, metalsmith, done) {
+//     Object.keys(files).forEach(function(file){
+//       console.log('##', file)
+//       //var data = files[file]
+//     })
+//     console.log(metalsmith.metadata().navs)
+//     done()
+//   }
+// }
