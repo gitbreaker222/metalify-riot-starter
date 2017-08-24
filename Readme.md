@@ -100,12 +100,6 @@ TODO
 
 ---
 
-## NetlifyCMS
-
-TODO
-
----
-
 ## Riot JS
 
 > Simple and elegant component-based UI library
