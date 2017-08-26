@@ -37,8 +37,6 @@
     "metalsmith-markdown": "0.2.1",
     "metalsmith-move-up": "^1.0.0",
     "metalsmith-sass": "^1.4.0",
-    "prismic-dom": "^1.2.8",
-    "prismic-javascript": "^1.2.0",
     "pug": "^2.0.0-rc.3",
     "recursive-readdir": "^2.1.0",
     "rimraf": "^2.2.8",

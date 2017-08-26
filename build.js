@@ -9,6 +9,8 @@ const moveUp        = require('metalsmith-move-up')
 var dev = process.argv[2] || false
 if (dev) dev        = require("metalsmith-dev")
 
+console.log(dev)
+
 var site = Metalsmith(__dirname)
   .metadata({
     title: info.name,
@@ -24,7 +26,6 @@ var site = Metalsmith(__dirname)
 site.ignore([
     '.*.*',  //ignore hidden files like .eslintrc
     'layouts',
-    'content'
   ])
   .clean(false)
   .use(sass({
@@ -43,8 +44,7 @@ site.ignore([
     ],
     output: 'assets/main.tag.js'
   }))
-  .use(fetchPrismicContent())
-  //.use(markdown())
+  .use(markdown())
   .use(contentMenu({
     folder: 'content',
     //fileType: '.html',
@@ -67,32 +67,6 @@ if (dev) {
   dev.watch(site)
   dev.serve(site)
 }
-  function fetchPrismicContent() {
-    var Prismic = require('prismic-javascript')
-    var PrismicDOM = require('prismic-dom')
-
-    var apiEndpoint = "https://breaker222portfolio.prismic.io/api/v2"
-    return function(files, metalsmith, done) {
-
-      Prismic.getApi(apiEndpoint, { })
-      .then(function(api) {
-        return api.query("") // An empty query will return all the documents
-      })
-      .then(function(response) {
-        console.log("Documents: ", response.results)
-      }, function(err) {
-        console.log("Something went wrong: ", err)
-      })
-
-      Object.keys(files).forEach(function(file){
-        //console.log('##', file)
-        //var data = files[file]
-      })
-      //console.log(metalsmith.metadata())
-      done()
-    }
-  }
-
 
 // function debug() {
 //   return function(files, metalsmith, done) {

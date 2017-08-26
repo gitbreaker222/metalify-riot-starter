@@ -9,3 +9,5 @@ examples/
 npm-debug\.log
 
 build/
+
+\.env
