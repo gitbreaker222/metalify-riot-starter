@@ -24,7 +24,7 @@ var site = Metalsmith(__dirname)
 // Break the chain, so "site" is defined before dev tasks access it below
 
 site.ignore([
-    '.*.*',  //ignore hidden files like .eslintrc
+    '.*',  //ignore hidden files like .eslintrc
     'layouts',
   ])
   .clean(false)
