@@ -17,6 +17,8 @@ module.exports = (dato, root, i18n) => {
 
   /*
   === FRONTPAGE / INDEX ===
+  Create a markdown file with content coming from the `index` item
+  type stored in DatoCMS
   */
   root.createPost(`src/content/index.md`, 'yaml', {
     frontmatter: {
@@ -29,9 +31,12 @@ module.exports = (dato, root, i18n) => {
 
   /*
   === POSTS ===
+  Create a `posts` directory (or empty it if already exists)...
   */
   root.directory("src/content/posts", (folder) => {
+    // ...and for each of the posts stored online...
     dato.posts.forEach((post) => {
+      // ...create a markdown file with all the metadata in the frontmatter
       folder.createPost(
         `${post.slug}.md`, "yaml", {
           frontmatter: {
@@ -47,9 +52,9 @@ module.exports = (dato, root, i18n) => {
   })
 
 }
+
+
 /*
-
-
 module.exports = (dato, root, i18n) => {
 
   // Create a YAML data file to store global data about the site
