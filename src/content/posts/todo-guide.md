@@ -1,8 +1,8 @@
 ---
 layout: post
-title: TODO Guide
-date: 2017-08-05T00:59:11.883Z
-thumbnail: /media/IMG_20170429_115918_edit.jpg
+title: 'TODO: Guide'
+date: 2017-08-27T02:00:00.000Z
+image: null
 ---
 
 Write some instruction as sample blog post

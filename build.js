@@ -12,7 +12,6 @@ if (dev) dev        = require("metalsmith-dev")
 var site = Metalsmith(__dirname)
   .metadata({
     title: info.name,
-    description: info.description,
     generator: "Metalsmith",
     url: info.homepage
   })
@@ -22,8 +21,8 @@ var site = Metalsmith(__dirname)
 // Break the chain, so "site" is defined before dev tasks access it below
 
 site.ignore([
-    '.*.*',  //ignore hidden files like .eslintrc
-    'layouts'
+    '.*',  //ignore hidden files like .eslintrc
+    'layouts',
   ])
   .clean(false)
   .use(sass({

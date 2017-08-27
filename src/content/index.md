@@ -1,8 +1,9 @@
 ---
 layout: layout
-title: Metalify-Riot-Starter
-showInMenu: true
+title: metalify-riot-starter
+subtitle: 'Creating static websites built with metalsmith, hosted on netlify, CMS with datocms.com and with riot.js for custom tags'
 ---
+
 ![test image](./media/logo.svg)
 
 - Edit content with CMS
