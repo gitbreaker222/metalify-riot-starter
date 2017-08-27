@@ -9,12 +9,9 @@ const moveUp        = require('metalsmith-move-up')
 var dev = process.argv[2] || false
 if (dev) dev        = require("metalsmith-dev")
 
-console.log(dev)
-
 var site = Metalsmith(__dirname)
   .metadata({
     title: info.name,
-    description: info.description,
     generator: "Metalsmith",
     url: info.homepage
   })

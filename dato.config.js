@@ -14,23 +14,38 @@
 
 
 module.exports = (dato, root, i18n) => {
-  // inside a "src/articles" directory...
-  root.directory("src/content/posts", (articlesDir) => {
 
-    // ...let's write 10 markdown articles, complete with frontmatter
-    for (let i = 0; i < 10; i++) {
+  /*
+  === FRONTPAGE / INDEX ===
+  */
+  root.createPost(`src/content/index.md`, 'yaml', {
+    frontmatter: {
+      layout: 'layout',
+      title: dato.index.title,
+      subtitle: dato.index.subtitle,
+    },
+    content: dato.index.content
+  })
 
-      articlesDir.createPost(
-        `article-${i}.md`, "yaml", {
+  /*
+  === POSTS ===
+  */
+  root.directory("src/content/posts", (folder) => {
+    dato.posts.forEach((post) => {
+      folder.createPost(
+        `${post.slug}.md`, "yaml", {
           frontmatter: {
-            title: `Article ${i}`,
-            category: [ "Random" ]
+            layout: 'post',
+            title: post.title,
+            date: post.date,
+            image: post.image,
           },
-          content: "Lorem **ipsum dolor sit amet**, consectetur adipiscing elit."
+          content: post.content
         }
       )
-    }
+    })
   })
+
 }
 /*
 
