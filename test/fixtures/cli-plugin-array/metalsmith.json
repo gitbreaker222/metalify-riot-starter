@@ -1,6 +1,0 @@
-{
-  "plugins": [
-    { "metalsmith-drafts": {} },
-    { "metalsmith-markdown": {} }
-  ]
-}
