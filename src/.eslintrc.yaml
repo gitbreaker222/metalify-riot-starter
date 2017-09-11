@@ -6,7 +6,7 @@
     - html
   globals:
     riot: true
-    PrismicDom: true
+    route: true
     XMLHttpRequest: true
     app: true
   rules:

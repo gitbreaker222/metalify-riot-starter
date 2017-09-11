@@ -1,11 +1,19 @@
 <app onclick={ removeSplash }>
+  <yield/>
+
   <header>
-    <nav>nav</nav>
+    <nav role="navigation" aria-labelledby="firstLabel">
+      <h2>Menu</h2>
+      <div each={ pages}>
+        <a href="#{slug}">{title}</a>
+      </div>
+    </nav>
     <h1>#title</h1>
   </header>
 
   <main>
-    <app-page each={ app.content }
+    <app-page each={ pages }
+      if={ isCurrentPage(this) }
       tag-title={ this.title }>
       { this.content }
     </app-page>
@@ -13,13 +21,48 @@
 
   <script>
     var tag = this
+    tag.pages = []
+    tag.currentPage = '/index'
     tag.removeSplash = function () {
       tag.root.classList.remove('loading')
     }
 
+    tag.isCurrentPage = function (page) {
+      return page.slug === tag.currentPage
+    }
+
     app.on(app.evt.contentReady, function () {
+      tag.pages = app.data.content
+      route.start(true)
       tag.removeSplash()
       tag.update()
+    })
+
+    route(function(pageName, articleName) {
+      console.log(pageName, articleName)
+      var page
+      for (var i = 0; i < tag.pages.length; i++) {
+        page = tag.pages[i]
+        if (page.slug === pageName) {
+          if (page.template === 'page') {
+            tag.currentPage = pageName
+            tag.update()
+            return
+          } else {
+            //TODO PAGE IS LIST
+          }
+        }
+      }
+      //redirect to base, when not defined
+      route('/')
+    })
+    route('/', function () {
+      tag.currentPage = tag.pages[0].slug
+      tag.update()
+    })
+
+    this.on('mount', function () {
+      app.trigger(app.evt.appReady)
     })
   </script>
 </app>

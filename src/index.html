@@ -9,15 +9,16 @@
   </head>
   <body>
     <app class="loading">
-      loading
+      <div class="splash"></div>
     </app>
 
     <script src="https://cdn.jsdelivr.net/npm/riot@3.7/riot+compiler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/riot-route@3.1.2/dist/route.min.js"></script>
     <script type="riot/tag" data-src="assets/all.tag.js"></script>
     <script src="/assets/main.js"></script>
     <script type="text/javascript">
       window.onload = function () {
-        app.init()
+        app.trigger(app.evt.init)
       }
     </script>
   </body>
