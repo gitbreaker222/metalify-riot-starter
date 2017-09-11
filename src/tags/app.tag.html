@@ -1,9 +1,25 @@
-<app>
-  <div>
-    ready
-  </div>
+<app onclick={ removeSplash }>
+  <header>
+    <nav>nav</nav>
+    <h1>#title</h1>
+  </header>
+
+  <main>
+    <app-page each={ app.content }
+      tag-title={ this.title }>
+      { this.content }
+    </app-page>
+  </main>
 
   <script>
-    console.log('works', this)
+    var tag = this
+    tag.removeSplash = function () {
+      tag.root.classList.remove('loading')
+    }
+
+    app.on(app.evt.contentReady, function () {
+      tag.removeSplash()
+      tag.update()
+    })
   </script>
 </app>

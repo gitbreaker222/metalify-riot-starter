@@ -1,0 +1,14 @@
+<app-page class={ opts.template }>
+  <h1>{ opts.tagTitle }</h1>
+
+  <div ref="content">
+    <yield/>
+  </div>
+
+  <script>
+    function init() {
+      this.refs.content.innerHTML = this.content
+    }
+    this.on('mount', init)
+  </script>
+</app-page>
