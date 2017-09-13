@@ -12,57 +12,67 @@
   </header>
 
   <main>
-    <app-page each={ pages }
-      if={ isCurrentPage(this) }
-      tag-title={ this.title }>
-      { this.content }
+    <app-page each={ page in pages }
+      if={ isCurrentPage(page) }>
+      <raw html={page.content}></raw>
     </app-page>
   </main>
 
   <script>
+    /*
+      Afraid of losing your cultural heritage?
+      Culture lives by celebrating and sharing it.
+      It cannot be saved by oppressing others.
+    */
     var tag = this
     tag.pages = []
-    tag.currentPage = '/index'
+    tag.currentPage = 'home'
+
     tag.removeSplash = function () {
       tag.root.classList.remove('loading')
     }
 
     tag.isCurrentPage = function (page) {
+      if (tag.currentPage === 'home') {
+        return page.position === 1
+      }
       return page.slug === tag.currentPage
     }
 
-    app.on(app.evt.contentReady, function () {
-      tag.pages = app.data.content
-      route.start(true)
-      tag.removeSplash()
-      tag.update()
-    })
-
+    /*
+      MAP ROUTES TO PAGES
+    */
     route(function(pageName, articleName) {
       console.log(pageName, articleName)
       var page
       for (var i = 0; i < tag.pages.length; i++) {
         page = tag.pages[i]
         if (page.slug === pageName) {
-          if (page.template === 'page') {
-            tag.currentPage = pageName
-            tag.update()
-            return
-          } else {
-            //TODO PAGE IS LIST
-          }
+          tag.currentPage = pageName
+          tag.update()
+          return
         }
       }
       //redirect to base, when not defined
       route('/')
     })
     route('/', function () {
-      tag.currentPage = tag.pages[0].slug
+      if (!tag.pages.length) return
+      tag.currentPage = 'home'
       tag.update()
     })
 
+    /*
+      EVENT LISTENERS
+    */
     this.on('mount', function () {
       app.trigger(app.evt.appReady)
+    })
+    app.on(app.evt.contentReady, function (data) {
+      tag.pages = data
+      route.start(true)
+      tag.removeSplash()
+      tag.update()
     })
   </script>
 </app>

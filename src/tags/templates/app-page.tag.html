@@ -1,14 +1,19 @@
-<app-page class={ opts.template }>
-  <h1>{ opts.tagTitle }</h1>
+<app-page class={ page.template }>
+  <h2>{ page.title }</h2>
 
-  <div ref="content">
-    <yield/>
-  </div>
+  <yield/>
+
+  <ul if={ page.children }>
+    <li each={ item in page.children }>
+      <time>{ item.date }</time>
+      <a href="#{page.slug}/{item.slug}">
+        <h3>{ item.title }</h3>
+      </a>
+      <raw html={ item.content }></raw>
+    </li>
+  </ul>
 
   <script>
-    function init() {
-      this.refs.content.innerHTML = this.content
-    }
-    this.on('mount', init)
+
   </script>
 </app-page>

@@ -2,7 +2,9 @@
 APP SETUP
 */
 var app = {}
-app.data = {}
+app.data = {
+  content: []
+}
 app.services = {}
 app.ctrl = {}
 riot.observable(app)
@@ -20,12 +22,13 @@ app.evt = {
 app.one(app.evt.init, function () {
   riot.mount('*')
 })
+//wait for app.tag.html to be mounted
 app.one(app.evt.appReady, function () {
   //load content
   var url = '/content.json'
   app.one(app.evt.contentLoaded, function (data) {
     app.data.content = JSON.parse(data)
-    app.trigger(app.evt.contentReady)
+    app.trigger(app.evt.contentReady, app.data.content)
   })
   app.load(url, app.evt.contentLoaded)
 })
