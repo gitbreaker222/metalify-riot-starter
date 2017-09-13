@@ -44,6 +44,10 @@ Website generator with Metalsmith, Netlify / NetlifyCMS and Riot JS
   - Back in Project: Create a new file in root folder: `.env`
   - paste the API token in there: `DATO_API_TOKEN=<API-TOKEN-HERE>`
   - **IMPORTANT:** Don't add `.env` to VCS
+  - test connection *(stop prior running process with `ctrl + c`/`cmd + c`)*
+  ```
+  make build dev=true
+  ```
 
 5. Now you can run your site locally with content from DatoCMS. To make it ready for production and let it update automatically online, you finally need to **connect netlify and DatoCMS**:
   - At DatoCMS go to `Settings > Deployment settings`

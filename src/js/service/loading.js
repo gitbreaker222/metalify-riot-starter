@@ -1,3 +1,8 @@
+/*
+Load an [url] and then trigger the given [eventName]
+with riot observer on the global "app" object.
+The event contains the result data
+*/
 app.load = function (url, eventName) {
   var ajax = new XMLHttpRequest()
   ajax.onreadystatechange = function() {

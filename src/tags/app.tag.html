@@ -42,18 +42,47 @@
     /*
       MAP ROUTES TO PAGES
     */
-    route(function(pageName, articleName) {
-      console.log(pageName, articleName)
+    route(function(pageName, subPageName) {
+      console.log(pageName, subPageName)
+
       var page
-      for (var i = 0; i < tag.pages.length; i++) {
-        page = tag.pages[i]
-        if (page.slug === pageName) {
-          tag.currentPage = pageName
+      var index
+
+      //higher order / helper functions
+      var getPageIndex = function (name, collection) {
+        var page
+        for (var i = 0; i < collection.length; i++) {
+          page = collection[i]
+          if (page.slug === name) {
+            return i
+          }
+        }
+        return -1
+      }
+
+      var checkSubPage = function (page) {
+        if (subPageName && page.children && page.children.length) {
+          index = getPageIndex(subPageName, page.children)
+          if (index >= 0) {
+            tag.currentPage += '/' + subPageName
+          } else {
+            return false
+          }
+        }
+        return true
+      }
+
+      // main
+      index = getPageIndex(pageName, tag.pages)
+      if (index >= 0) {
+        page = tag.pages[index]
+        tag.currentPage = pageName
+        if (checkSubPage(page)) {
           tag.update()
           return
         }
       }
-      //redirect to base, when not defined
+      //not found -> TODO 404
       route('/')
     })
     route('/', function () {
