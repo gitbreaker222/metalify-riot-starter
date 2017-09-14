@@ -1,21 +1,20 @@
 <app onclick={ removeSplash }>
-  <yield/>
 
   <header>
     <nav role="navigation" aria-labelledby="firstLabel">
       <h2>Menu</h2>
-      <div each={ pages}>
-        <a href="#{slug}">{title}</a>
+      <div each={ page in app.data.content }>
+        <a href="#{ page.slug }">{ page.title }</a>
       </div>
     </nav>
-    <h1>#title</h1>
+    <h1>#mainTitle</h1>
   </header>
 
-  <main>
-    <app-page each={ page in pages }
-      if={ isCurrentPage(page) }>
-      <raw html={page.content}></raw>
-    </app-page>
+  <main if={ getCurrentPage()  }>
+    <app-page if={ currentPage.template == 'page' }></app-page>
+
+    <!-- TODO post temlate -->
+
   </main>
 
   <script>
@@ -24,72 +23,18 @@
       Culture lives by celebrating and sharing it.
       It cannot be saved by oppressing others.
     */
+
     var tag = this
-    tag.pages = []
-    tag.currentPage = 'home'
+    tag.currentPage = {}
+
+    tag.getCurrentPage = function () {
+      tag.currentPage = app.data.currentPage
+      return app.data.currentPage
+    }
 
     tag.removeSplash = function () {
       tag.root.classList.remove('loading')
     }
-
-    tag.isCurrentPage = function (page) {
-      if (tag.currentPage === 'home') {
-        return page.position === 1
-      }
-      return page.slug === tag.currentPage
-    }
-
-    /*
-      MAP ROUTES TO PAGES
-    */
-    route(function(pageName, subPageName) {
-      console.log(pageName, subPageName)
-
-      var page
-      var index
-
-      //higher order / helper functions
-      var getPageIndex = function (name, collection) {
-        var page
-        for (var i = 0; i < collection.length; i++) {
-          page = collection[i]
-          if (page.slug === name) {
-            return i
-          }
-        }
-        return -1
-      }
-
-      var checkSubPage = function (page) {
-        if (subPageName && page.children && page.children.length) {
-          index = getPageIndex(subPageName, page.children)
-          if (index >= 0) {
-            tag.currentPage += '/' + subPageName
-          } else {
-            return false
-          }
-        }
-        return true
-      }
-
-      // main
-      index = getPageIndex(pageName, tag.pages)
-      if (index >= 0) {
-        page = tag.pages[index]
-        tag.currentPage = pageName
-        if (checkSubPage(page)) {
-          tag.update()
-          return
-        }
-      }
-      //not found -> TODO 404
-      route('/')
-    })
-    route('/', function () {
-      if (!tag.pages.length) return
-      tag.currentPage = 'home'
-      tag.update()
-    })
 
     /*
       EVENT LISTENERS
@@ -97,11 +42,8 @@
     this.on('mount', function () {
       app.trigger(app.evt.appReady)
     })
-    app.on(app.evt.contentReady, function (data) {
-      tag.pages = data
-      route.start(true)
+    app.on(app.evt.contentReady, function () {
       tag.removeSplash()
-      tag.update()
     })
   </script>
 </app>
