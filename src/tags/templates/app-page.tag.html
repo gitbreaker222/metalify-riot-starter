@@ -3,14 +3,21 @@
   <div ref="content"></div>
 
   <ul if={ page.children }>
-    <li each={ item in page.children}>
-      {item.title}
+    <li each={ item in page.children }>
+      <a href="#{page.slug}/{item.slug}">
+        <h3>{ item.title }</h3>
+      </a>
+      <div run={ insertContent(this) }></div>
     </li>
   </ul>
 
   <script>
     var tag = this
     tag.page = {}
+    tag.insertContent = function (listElement) {
+      listElement.root.children[1].innerHTML = listElement.item.content
+    }
+
     var uuupdate = function () {
       tag.page = app.data.currentPage
       tag.refs.content.innerHTML = tag.page.content

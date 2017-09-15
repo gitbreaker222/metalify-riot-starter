@@ -3,6 +3,7 @@ APP SETUP
 */
 var app = {}
 app.data = {
+  meta: {},
   content: [],
   currentPage: null //object
 }
@@ -63,7 +64,9 @@ app.one(app.evt.appReady, function () {
   //load content - prepare
   var url = '/content.json'
   app.one(app.evt.contentLoaded, function (data) {
-    app.data.content = JSON.parse(data)
+    data =  JSON.parse(data)
+    app.data.meta = data.meta
+    app.data.content = data.pages
     route.start(true)
     app.trigger(app.evt.contentReady)
   })

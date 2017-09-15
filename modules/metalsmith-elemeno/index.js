@@ -67,7 +67,10 @@ var metalsmith_elemeno = function (opts) {
     }
     var finish = function () {
       files['content.json'] = {
-        contents: JSON.stringify(pages)
+        contents: JSON.stringify({
+          meta: meta,
+          pages: pages
+        })
       }
       done()
     }
