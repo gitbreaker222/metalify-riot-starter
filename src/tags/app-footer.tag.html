@@ -1,11 +1,12 @@
 <app-footer>
   <footer>
     <p>
-      Generated with { opts.generator } &mdash; <a href="{ opts.url }">{ opts.url }</a>
+      Generated with { data.meta.generator } &mdash;
+      <a href="{ data.meta.url }">{ data.meta.url }</a>
     </p>
   </footer>
 
   <script>
-    console.log('footer')
+    this.data = app.data
   </script>
 </app-footer>

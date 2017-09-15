@@ -2,20 +2,26 @@
   <yield/>
 
   <header>
-    <nav role="navigation" aria-labelledby="firstLabel">
-      <h2>Menu</h2>
-      <div each={ pages}>
-        <a href="#{slug}">{title}</a>
-      </div>
-    </nav>
-    <h1>#title</h1>
+    <h1>{ app.data.meta.mainTitle }</h1>
   </header>
 
-  <main>
-    <app-page each={ page in pages }
-      if={ isCurrentPage(page) }>
-      <raw html={page.content}></raw>
-    </app-page>
+  <aside class="">
+    <h2>Menu</h2>
+    <nav role="navigation" aria-labelledby="firstLabel">
+      <div each={ page in app.data.content }>
+        <a href="#{ page.slug }">
+          { page.title }
+        </a>
+      </div>
+    </nav>
+    <app-footer></app-footer>
+  </aside>
+
+  <main if={ getCurrentPage()  }>
+    <app-page if={ currentPage.template == 'page' }></app-page>
+
+    <!-- TODO post temlate -->
+
   </main>
 
   <script>
@@ -24,43 +30,18 @@
       Culture lives by celebrating and sharing it.
       It cannot be saved by oppressing others.
     */
+
     var tag = this
-    tag.pages = []
-    tag.currentPage = 'home'
+    tag.currentPage = {}
+
+    tag.getCurrentPage = function () {
+      tag.currentPage = app.data.currentPage
+      return app.data.currentPage
+    }
 
     tag.removeSplash = function () {
       tag.root.classList.remove('loading')
     }
-
-    tag.isCurrentPage = function (page) {
-      if (tag.currentPage === 'home') {
-        return page.position === 1
-      }
-      return page.slug === tag.currentPage
-    }
-
-    /*
-      MAP ROUTES TO PAGES
-    */
-    route(function(pageName, articleName) {
-      console.log(pageName, articleName)
-      var page
-      for (var i = 0; i < tag.pages.length; i++) {
-        page = tag.pages[i]
-        if (page.slug === pageName) {
-          tag.currentPage = pageName
-          tag.update()
-          return
-        }
-      }
-      //redirect to base, when not defined
-      route('/')
-    })
-    route('/', function () {
-      if (!tag.pages.length) return
-      tag.currentPage = 'home'
-      tag.update()
-    })
 
     /*
       EVENT LISTENERS
@@ -68,11 +49,8 @@
     this.on('mount', function () {
       app.trigger(app.evt.appReady)
     })
-    app.on(app.evt.contentReady, function (data) {
-      tag.pages = data
-      route.start(true)
+    app.on(app.evt.contentReady, function () {
       tag.removeSplash()
-      tag.update()
     })
   </script>
 </app>

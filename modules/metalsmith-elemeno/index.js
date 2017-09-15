@@ -33,6 +33,27 @@ var metalsmith_elemeno = function (opts) {
           item.content = item.content.html //the actual content field
         }
         item.template = templateName
+        item.children = []
+
+        if (item.collection) {
+          /*
+            ## CREATE LIST-VIEW PAGE AND ALL ITEMS
+          */
+          asyncCounter++
+          elemeno.getCollectionItems(item.collection)
+          .then(function(response) {
+            asyncCounter--
+
+            var collection = response.data
+            collection = parse(collection, 'post')
+            collection = sort(collection)
+            item.children = collection
+            if (!asyncCounter) finish()
+          }, function(error) {
+            done(new Error(error))
+          })
+        }
+
         return item
       })
       return collection
@@ -46,7 +67,10 @@ var metalsmith_elemeno = function (opts) {
     }
     var finish = function () {
       files['content.json'] = {
-        contents: JSON.stringify(pages)
+        contents: JSON.stringify({
+          meta: meta,
+          pages: pages
+        })
       }
       done()
     }
@@ -79,33 +103,6 @@ var metalsmith_elemeno = function (opts) {
       pages = response.data
       pages = parse(pages, 'page')
       pages = sort(pages)
-
-      pages.forEach((page) => {
-        if (page.collection) {
-          /*
-            ## CREATE LIST-VIEW PAGE AND ALL ITEMS
-          */
-          page.template = 'list'
-
-          /*
-          ### GET COLLECTION ITEMS
-          */
-          asyncCounter++
-          elemeno.getCollectionItems(page.collection)
-          .then(function(response) {
-            asyncCounter--
-
-            var collection = response.data
-            collection = parse(collection, 'post')
-            collection = sort(collection)
-            page.children = collection
-
-            if (!asyncCounter) finish()
-          }, function(error) {
-            done(new Error(error))
-          })
-        }
-      })
 
       if (!asyncCounter) finish()
     }, function(error) {

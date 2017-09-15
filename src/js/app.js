@@ -3,13 +3,15 @@ APP SETUP
 */
 var app = {}
 app.data = {
-  content: []
+  meta: {},
+  content: [],
+  currentPage: null //object
 }
 app.services = {}
 app.ctrl = {}
 riot.observable(app)
 
-// define event names, convention
+// EVENT NAMES (prevent confusion)
 app.evt = {
   init: 'init',
   appReady: 'appReade',
@@ -18,17 +20,56 @@ app.evt = {
   error: 'error'
 }
 
-//init
+// ROUTES
+route(function(pageName, subPageName) {
+  function getPageIndex (collection, slug) {
+    return collection.findIndex(function (page) {
+      return page.slug === slug
+    })
+  }
+  function assignPage (page) {
+    app.data.currentPage = page
+    riot.update()
+  }
+
+  var page
+  var index = getPageIndex(app.data.content, pageName)
+  if (index >= 0) {
+    page = app.data.content[index]
+    if (subPageName && page.collection) {
+      index = getPageIndex(page.children, subPageName)
+      if (index >= 0) {
+        page = page.children[index]
+        return assignPage(page)
+      }
+    } else {
+      return assignPage(page)
+    }
+  }
+
+  //not found -> TODO 404
+  route('/')
+})
+route('/', function () {
+  if (!app.data.content.length) return
+  app.data.currentPage = app.data.content[0]
+})
+
+// INIT
 app.one(app.evt.init, function () {
   riot.mount('*')
 })
 //wait for app.tag.html to be mounted
 app.one(app.evt.appReady, function () {
-  //load content
+  //load content - prepare
   var url = '/content.json'
   app.one(app.evt.contentLoaded, function (data) {
-    app.data.content = JSON.parse(data)
-    app.trigger(app.evt.contentReady, app.data.content)
+    data =  JSON.parse(data)
+    app.data.meta = data.meta
+    app.data.content = data.pages
+    route.start(true)
+    app.trigger(app.evt.contentReady)
   })
+  //execute
   app.load(url, app.evt.contentLoaded)
 })

@@ -1,19 +1,29 @@
-<app-page class={ page.template }>
+<app-page>
   <h2>{ page.title }</h2>
-
-  <yield/>
+  <div ref="content"></div>
 
   <ul if={ page.children }>
     <li each={ item in page.children }>
-      <time>{ item.date }</time>
       <a href="#{page.slug}/{item.slug}">
         <h3>{ item.title }</h3>
       </a>
-      <raw html={ item.content }></raw>
+      <div run={ insertContent(this) }></div>
     </li>
   </ul>
 
   <script>
+    var tag = this
+    tag.page = {}
+    tag.insertContent = function (listElement) {
+      listElement.root.children[1].innerHTML = listElement.item.content
+    }
 
+    var uuupdate = function () {
+      tag.page = app.data.currentPage
+      tag.refs.content.innerHTML = tag.page.content
+      tag.update()
+    }
+    this.on('mount', uuupdate)
+    route(uuupdate)
   </script>
 </app-page>
