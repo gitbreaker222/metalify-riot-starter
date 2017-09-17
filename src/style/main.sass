@@ -1,14 +1,75 @@
-@import "milligram.min"
-@import "nav"
+// ==========================================================================
+// Variables
+// ==========================================================================
+// Colors
+$hue:                   270
+$color-highlight:       hsl($hue, 50%, 50%)
+$color-highlight-on:    hsl($hue, 77%, 55%)
+$color-highlight-off:   hsl($hue, 36%, 53%)
+
+$color-light:           hsl($hue, 20%, 94%)
+$color-dark:            hsl($hue, 7%, 7%)
+
+// Layout
+$sm:                    400px // mobile landscape
+$md:                    680px //tablet
+$lg:                    960px //laptop, tablet landscape
+$xl:                    1200px //desktop
+
+$side-menu-width:       17rem
+
+// ==========================================================================
+// Library
+// ==========================================================================
+// Variables pre definitions
+$global-bg:             $color-light
+$text-color:            $color-dark
+$link-color:            $color-highlight
+$link-hover-color:      $color-highlight-on
+$button-bg:             $color-highlight
+$button-hover-bg:       $color-highlight-on
+$button-border-radius:  2px
+@import "baseguide"
+// Customization
+button
+  @extend  .btn
+  border-color: currentColor
+p
+  max-width: 40em
+
+// ==========================================================================
+// Mixins
+// ==========================================================================
+=setMenuToggleBtn()
+  button[name=toggle-menu]
+    @media (min-width: $md)
+      display: none
+
+// ==========================================================================
+// General
+// ==========================================================================
+html
+  font-size: 0.8rem
+  @media (min-width: $sm)
+    font-size: 1rem
+  @media (min-width: $md)
+    font-size: 1rem
+  @media (min-width: $lg)
+    font-size: 1.2rem
+
 
 body
-  padding: 1rem
-
-  li
-    list-style-position: outside
-    margin-left: 2em
-
   app
+    display: flex
+    flex-flow: column
+    overflow: auto
+
+    > *
+      padding: 1rem
+
+    @media (min-width: $md)
+      padding-right: $side-menu-width
+
     .splash
       z-index: -1
       position: fixed
@@ -16,7 +77,7 @@ body
       left: 0
       width: 100vw
       height: 100vh
-      background: #222
+      background: rgba(34, 34, 34, 0.8)
       opacity: 0
       transition: opacity 800ms
 
@@ -40,9 +101,18 @@ body
         background-repeat: no-repeat
         background-position: center
         background-size: 20%
-        animation: rotate 2s 3 linear
+        animation: rotate 2s infinite linear
 
 
+// ==========================================================================
+// Modules
+// ==========================================================================
+@import "header"
+@import "nav"
+
+// ==========================================================================
+// Keyframes
+// ==========================================================================
 @keyframes rotate
   from
     transform: rotate(0deg)

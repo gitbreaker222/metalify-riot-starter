@@ -2,10 +2,18 @@
   <yield/>
 
   <header>
+    <div class="controls">
+      <button type="button" name="toggle-menu" onclick={toggleMenu}>
+        ▤
+      </button>
+    </div>
     <h1>{ app.data.meta.mainTitle }</h1>
   </header>
 
-  <aside class="">
+  <aside class="nav { open: menuOpen }">
+    <button type="button" name="toggle-menu" onclick={toggleMenu}>
+      ▤
+    </button>
     <h2>Menu</h2>
     <nav role="navigation" aria-labelledby="firstLabel">
       <div each={ page in app.data.content }>
@@ -18,7 +26,9 @@
   </aside>
 
   <main if={ getCurrentPage()  }>
-    <app-page if={ currentPage.template == 'page' }></app-page>
+    <app-page if={ currentPage.template == 'page' }
+      class={ currentPage.slug}>
+    </app-page>
 
     <!-- TODO post temlate -->
 
@@ -33,6 +43,11 @@
 
     var tag = this
     tag.currentPage = {}
+    tag.menuOpen = false
+
+    tag.toggleMenu = function () {
+      tag.menuOpen = !tag.menuOpen
+    }
 
     tag.getCurrentPage = function () {
       tag.currentPage = app.data.currentPage
@@ -51,6 +66,13 @@
     })
     app.on(app.evt.contentReady, function () {
       tag.removeSplash()
+      var headTitle = document.querySelector('head title')
+      var favicon = document.querySelector('head link[rel~=icon]')
+
+      headTitle.innerText = app.data.meta.mainTitle
+      if (app.data.meta.favicon) {
+        favicon.href = app.data.meta.favicon
+      }
     })
   </script>
 </app>
