@@ -22,8 +22,7 @@ var site = Metalsmith(__dirname)
 // Break the chain, so "site" is defined before dev tasks access it below
 
 site.ignore([
-    '.*',  //ignore hidden files like .eslintrc
-    'layouts',
+    '.*'  //ignore hidden files like .eslintrc
   ])
   .clean(true)
   .use(elemeno(process.env.ELEMENO_API_TOKEN))

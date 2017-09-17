@@ -2,7 +2,7 @@
   "name": "Metalify-Riot-Starter",
   "repository": "git@github.com:gitbreaker222/metalify-riot-starter.git",
   "homepage": "https://github.com/gitbreaker222/metalify-riot-starter",
-  "description": "Website generator with Metalsmith and Riot JS",
+  "description": "Website generator with Metalsmith, Netlify, Elemeno CMS and Riot JS",
   "bin": {
     "metalsmith": "bin/metalsmith",
     "_metalsmith": "bin/_metalsmith"
