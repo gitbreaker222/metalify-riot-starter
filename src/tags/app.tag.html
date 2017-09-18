@@ -7,7 +7,13 @@
         ▤
       </button>
     </div>
-    <h1>{ app.data.meta.mainTitle }</h1>
+    <a if={ app.data.meta.logo }
+      href="/#">
+      <img src={ app.data.meta.logo.imageUrl} alt="logo" class="h1">
+    </a>
+    <a href="/#">
+      <h1>{ app.data.meta.mainTitle }</h1>
+    </a>
   </header>
 
   <aside class="nav { open: menuOpen }">

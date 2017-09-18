@@ -55,6 +55,7 @@ Website generator with Metalsmith, Netlify, Elemeno CMS and Riot JS
   - save template, open the item and fill the fields
   - create collection **"Pages"** with these fields:
     - *Title* (Plain Text; required)
+    - *Description* (Plain Text)
     - *Position* (Number; Position in nav menu)
     - *Content* (Markdown)
     - *Collection* (Plain Text; Slug; Reference to another collection to list its content)

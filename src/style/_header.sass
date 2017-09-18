@@ -1,11 +1,25 @@
 app header
   background: $color-highlight
+  display: flex
+  flex-flow: row wrap
+  justify-content: center
+  align-items: center
 
   .controls
     display: flex
     justify-content: flex-end
+    min-height: 3rem
+    width: 100%
+    min-height: 3rem
 
     +setMenuToggleBtn()
 
     button
       position: fixed
+
+  img
+    width: 2em
+    margin: 0.3em
+
+  h1
+    color: $color-dark

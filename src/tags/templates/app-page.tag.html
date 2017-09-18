@@ -1,5 +1,5 @@
 <app-page>
-  <h2>{ page.title }</h2>
+  <h2 hide={ page.position === 1 }>{ page.title }</h2>
   <div ref="content"></div>
 
   <ul if={ page.children }>
@@ -7,6 +7,9 @@
       <a href="#{page.slug}/{item.slug}">
         <h3>{ item.title }</h3>
       </a>
+      <div class="description">
+        <em>{ item.description }</em>
+      </div>
       <div run={ insertContent(this) }></div>
     </li>
   </ul>
@@ -15,10 +18,17 @@
     var tag = this
     tag.page = {}
     tag.insertContent = function (listElement) {
-      listElement.root.children[1].innerHTML = listElement.item.content
+
+      //TODO trim to first 100char
+      listElement.root.lastElementChild.innerHTML = listElement.item.content
     }
 
     var uuupdate = function () {
+      //abort, if currentPage targets other template or tag not mounted
+      if (app.data.currentPage.template !== 'page'
+        || !tag.isMounted) {
+        return
+      }
       tag.page = app.data.currentPage
       tag.refs.content.innerHTML = tag.page.content
       tag.update()
