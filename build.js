@@ -2,6 +2,7 @@ const info          = require('./package.json')
 const Metalsmith    = require('./lib')
 const elemeno       = require('./modules/metalsmith-elemeno')
 const sass          = require('metalsmith-sass')
+const postcss       = require('metalsmith-with-postcss')
 const concat        = require('metalsmith-concat')
 var dev = process.argv[2] || false
 if (dev) {
@@ -34,6 +35,12 @@ site.ignore([
       return originalPath.replace("style", "assets")
     }
   }))
+  .use(postcss({
+    pattern: ['**/*.css', '!**/_*/*', '!**/_*'],
+    plugins: {
+      'autoprefixer': {}
+    }
+  })) 
   .use(concat({
     files: 'tags/**/*.tag.html',
     output: 'assets/all.tag.js'
