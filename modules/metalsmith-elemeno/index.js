@@ -16,12 +16,13 @@ var metalsmith_elemeno = function (opts) {
     var elemeno = new Elemeno(apiToken, opts)
     var meta
     var pages
+    var path = ''
     var asyncCounter = 0
 
     // higher order / helper functions
     var parse = function (collection, templateName) {
       collection = _.map(collection, function (item) {
-        item.content.slug = item.slug
+        item.content.slug = path + item.slug
         item = item.content //extract from the 'content' wrapper
         if (item.description){
           item.description = item.description.html
@@ -44,6 +45,7 @@ var metalsmith_elemeno = function (opts) {
           .then(function(response) {
             asyncCounter--
 
+            path = item.slug + '/' 
             var collection = response.data
             collection = parse(collection, 'post')
             collection = sort(collection)

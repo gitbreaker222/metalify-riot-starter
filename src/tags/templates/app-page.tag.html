@@ -4,7 +4,7 @@
 
   <ul if={ page.children }>
     <li each={ item in page.children }>
-      <a href="#{page.slug}/{item.slug}">
+      <a href="#{item.slug}">
         <h3>{ item.title }</h3>
       </a>
       <div class="description">
@@ -34,6 +34,6 @@
       tag.update()
     }
     this.on('mount', uuupdate)
-    route(uuupdate)
+    app.on(app.evt.pageChange, uuupdate) 
   </script>
 </app-page>

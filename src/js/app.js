@@ -17,6 +17,7 @@ app.evt = {
   appReady: 'appReade',
   contentLoaded: 'contentLoaded',
   contentReady: 'contentReady',
+  pageChange: 'pageChange',
   error: 'error'
 }
 
@@ -29,6 +30,7 @@ route(function(pageName, subPageName) {
   }
   function assignPage (page) {
     app.data.currentPage = page
+    app.trigger(app.evt.pageChange)
     riot.update()
   }
 
@@ -37,6 +39,7 @@ route(function(pageName, subPageName) {
   if (index >= 0) {
     page = app.data.content[index]
     if (subPageName && page.collection) {
+      subPageName = pageName + '/' + subPageName
       index = getPageIndex(page.children, subPageName)
       if (index >= 0) {
         page = page.children[index]
@@ -53,6 +56,8 @@ route(function(pageName, subPageName) {
 route('/', function () {
   if (!app.data.content.length) return
   app.data.currentPage = app.data.content[0]
+  app.trigger(app.evt.pageChange)
+  riot.update()
 })
 
 // INIT
