@@ -2,7 +2,7 @@
 
 **beta**
 
-Website generator with Metalsmith, Netlify, Elemeno CMS and Riot JS
+Website generator with Metalsmith, Netlify, Elemeno CMS, Riot JS and Baseguide
 
 ## Index
 
@@ -12,6 +12,8 @@ Website generator with Metalsmith, Netlify, Elemeno CMS and Riot JS
 - [Netlify]('#netlify')
 - [Elemeno CMS]('#elemeno')
 - [Riot JS]('#riot-js')
+- [Baseguide]('#baseguide')
+- [Licence]('#license')
 
 ## Configuration
 
@@ -97,12 +99,6 @@ Used to:
 
 Original README: https://www.npmjs.com/package/metalsmith
 
-### License
-
-The MIT License (MIT)
-
-Copyright &copy; Segment \<friends@segment.com\>
-
 ---
 
 ## Netlify
@@ -126,6 +122,14 @@ Copyright &copy; Segment \<friends@segment.com\>
 > Simple and elegant component-based UI library
 
 Original README: https://www.npmjs.com/package/riot
+
+---
+
+## Baseguide
+
+> A lightweight and robust CSS framework for prototyping and production code
+
+[basegui.de](http://basegui.de/)
 
 ---
 
