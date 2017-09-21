@@ -2,8 +2,8 @@
   <h2 hide={ page.position === 1 }>{ page.title }</h2>
   <div ref="content"></div>
 
-  <ul if={ page.children }>
-    <li each={ item in page.children }>
+  <virtual if={ page.children }>
+    <div each={ item in page.children }>
       <a href="#{item.slug}">
         <h3>{ item.title }</h3>
       </a>
@@ -11,8 +11,8 @@
         <em>{ item.description }</em>
       </div>
       <div run={ insertContent(this) }></div>
-    </li>
-  </ul>
+    </div>
+  </virtual>
 
   <script>
     var tag = this
@@ -34,6 +34,6 @@
       tag.update()
     }
     this.on('mount', uuupdate)
-    app.on(app.evt.pageChange, uuupdate) 
+    app.on(app.evt.pageChange, uuupdate)
   </script>
 </app-page>

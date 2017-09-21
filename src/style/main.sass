@@ -36,6 +36,10 @@ button
   border-color: currentColor
 p
   max-width: 40em
+blockquote
+  font-style: italic
+  padding: 1em
+  border-left: 0.1em solid currentColor
 
 // ==========================================================================
 // Mixins
@@ -102,6 +106,16 @@ body
         background-position: center
         background-size: 20%
         animation: rotate 2s infinite linear
+
+    main
+      max-width: 44rem
+      padding-top: 5em
+
+      .content
+        padding-top: 3em
+
+        p img
+          @extend .block-center
 
 
 // ==========================================================================
