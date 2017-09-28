@@ -36,10 +36,13 @@ button
   border-color: currentColor
 p
   max-width: 40em
+  white-space: pre-line
 blockquote
   font-style: italic
   padding: 1em
   border-left: 0.1em solid currentColor
+iframe
+  max-width: 100%
 
 // ==========================================================================
 // Mixins
@@ -115,6 +118,10 @@ body
 
         p img
           @extend .block-center
+
+    footer
+      p
+        margin-bottom: 1em
 
 
 // ==========================================================================
