@@ -1,8 +1,11 @@
 <app-footer>
   <footer>
-    <p>
-      Generated with { data.meta.generator } &mdash;
-      <a href="http://{ data.meta.url }">{ data.meta.url }</a>
+    <virtual if={ data.meta.footer }>{ data.meta.footer }</virtual>
+    <p if={ !data.meta.footer }>
+      Generated with
+      <a href="https://github.com/gitbreaker222/metalify-riot-starter">
+        metalify-riot-starter
+      </a>
     </p>
   </footer>
 
